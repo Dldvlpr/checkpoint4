@@ -3,5 +3,12 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<p>oqsihjqlsdijhqsmldijk</p>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    <button type="submit">edit user</button>
+
+    {{ form_end(form) }}
 {% endblock %}
