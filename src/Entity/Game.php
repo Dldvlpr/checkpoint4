@@ -21,6 +21,9 @@ class Game
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'games')]
     private Collection $users;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -66,6 +69,18 @@ class Game
         if ($this->users->removeElement($user)) {
             $user->removeGame($this);
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }
