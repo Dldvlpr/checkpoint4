@@ -13,19 +13,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/game', name: 'app_')]
+#[Route('/game', name: 'game_')]
 class GameController extends AbstractController
 {
-    #[Route('/', name: 'game')]
-    public function index(): Response
+    #[Route('/', name: 'index')]
+    public function index(GameRepository $gameRepository): Response
     {
+        $games = $gameRepository->findAll();
+
         return $this->render('game/index.html.twig', [
-            'controller_name' => 'GameController',
+            'games' => $games
         ]);
     }
 
-    #[Route('/new', name: 'game_new')]
-    public function edit(Request $request, FileUploader $fileUploader, GameRepository $gameRepository): Response
+    #[Route('/new', name: 'new')]
+    public function new(Request $request, FileUploader $fileUploader, GameRepository $gameRepository): Response
     {
         {
             $game = new Game();
@@ -42,7 +44,7 @@ class GameController extends AbstractController
 
                 $gameRepository->add($game, true);
 
-                return $this->redirectToRoute('app_game_new');
+                return $this->redirectToRoute('game_index');
             }
 
             return $this->renderForm('game/new.html.twig', [
@@ -51,5 +53,20 @@ class GameController extends AbstractController
         }
     }
 
+    #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, FileUploader $fileUploader, GameRepository $gameRepository, int $id, Game $game): Response
+    {
+        
+
+        $editForm = $this->createForm(GameFormType::class, $game);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $gameRepository->add($game, true);
+        }
+
+        return $this->render('game/index.html.twig', [
+            'controller_name' => 'GameController',
+        ]);
+    }
 
 }
