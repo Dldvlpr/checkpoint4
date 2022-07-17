@@ -54,19 +54,39 @@ class GameController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, FileUploader $fileUploader, GameRepository $gameRepository, int $id, Game $game): Response
+    public function edit(Request $request, FileUploader $fileUploader, GameRepository $gameRepository, Game $game): Response
     {
-        
 
-        $editForm = $this->createForm(GameFormType::class, $game);
-        $editForm->handleRequest($request);
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        $form = $this->createForm(GameFormType::class, $game);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $logoFile */
+            $logoFile = $form->get('logo')->getData();
+            if ($logoFile) {
+                $pathFile = $this->getParameter('logo_folder') . $game->getLogo();
+                unlink($pathFile);
+                $logoFileName = $fileUploader->upload($logoFile);
+                $game->setLogo($logoFileName);
+            }
             $gameRepository->add($game, true);
+            return $this->redirectToRoute('game_index');
+
         }
 
-        return $this->render('game/index.html.twig', [
-            'controller_name' => 'GameController',
+        return $this->renderForm('game/edit.html.twig', [
+            'form' => $form,
+            'game' => $game
         ]);
     }
+
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Game $game, GameRepository $gameRepository): Response
+    {
+        $pathFile = $this->getParameter('logo_folder') . $game->getLogo();
+        unlink($pathFile);
+        $gameRepository->remove($game, true);
+        return $this->redirectToRoute('game_index', [], Response::HTTP_SEE_OTHER);
+    }
+
 
 }

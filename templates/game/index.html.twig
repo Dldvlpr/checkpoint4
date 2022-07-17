@@ -5,7 +5,8 @@
 {% block body %}
 {% for game in games %}
     <div>
-    <a href="{{ path("game_edit", {id: game.id}) }}">{{ game.name }}</a>
+        <a href="{{ path('game_edit', {'id': game.id}) }}">{{ game.name }}</a>
+
     </div>
 {% endfor %}
 
