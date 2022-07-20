@@ -40,9 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?LolProfile $lolProfile = null;
-
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -162,28 +159,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getLolProfile(): ?LolProfile
-    {
-        return $this->lolProfile;
-    }
-
-    public function setLolProfile(?LolProfile $lolProfile): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($lolProfile === null && $this->lolProfile !== null) {
-            $this->lolProfile->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($lolProfile !== null && $lolProfile->getUser() !== $this) {
-            $lolProfile->setUser($this);
-        }
-
-        $this->lolProfile = $lolProfile;
 
         return $this;
     }
