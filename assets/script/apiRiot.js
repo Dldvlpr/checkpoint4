@@ -22,7 +22,7 @@ function getSummonerIdByPlayerName(playerName, apiRiotKey) {
        .then(data => {
            console.log(data)
        })
-       .catch(() => alert('error'))
+       .catch(() => alert("Une erreur s'est produite merci de refaire votre recherche."))
 }
 
 let Id = getSummonerIdByPlayerName('franckdes2b3', apiRiotKey)
