@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Game;
+use App\Entity\LolProfile;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -42,9 +43,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('email')
-            ->add('password')
-        ;
-
+            ->add('password');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
