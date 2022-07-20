@@ -31,6 +31,9 @@ class LolProfile
     #[ORM\Column(nullable: true)]
     private ?int $leaguePoints = null;
 
+    #[ORM\OneToOne(inversedBy: 'lolProfile', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class LolProfile
     public function setLeaguePoints(?int $leaguePoints): self
     {
         $this->leaguePoints = $leaguePoints;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
