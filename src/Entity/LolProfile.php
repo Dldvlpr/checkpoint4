@@ -22,6 +22,15 @@ class LolProfile
     #[ORM\Column(length: 255)]
     private ?string $summonerName = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $summonerRank = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $summonerTier = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $leaguePoints = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +68,42 @@ class LolProfile
     public function setSummonerName(string $summonerName): self
     {
         $this->summonerName = $summonerName;
+
+        return $this;
+    }
+
+    public function getSummonerRank(): ?string
+    {
+        return $this->summonerRank;
+    }
+
+    public function setSummonerRank(?string $summonerRank): self
+    {
+        $this->summonerRank = $summonerRank;
+
+        return $this;
+    }
+
+    public function getSummonerTier(): ?string
+    {
+        return $this->summonerTier;
+    }
+
+    public function setSummonerTier(?string $summonerTier): self
+    {
+        $this->summonerTier = $summonerTier;
+
+        return $this;
+    }
+
+    public function getLeaguePoints(): ?int
+    {
+        return $this->leaguePoints;
+    }
+
+    public function setLeaguePoints(?int $leaguePoints): self
+    {
+        $this->leaguePoints = $leaguePoints;
 
         return $this;
     }
