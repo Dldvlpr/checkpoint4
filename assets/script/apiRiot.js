@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } as apiUrl
 
 const urlApiLol = 'https://euw1.api.riotgames.com';
 const apiRiotKey = 'RGAPI-81da8750-b1f7-4283-b7e3-3a489e206628';
@@ -19,6 +20,8 @@ const apiUrls = {
   sumoner: "/lol/summoner/v4/summoners/by-name/franckdes2b3?api_key=%apikey%"
 }
 apiUrls.sumoner.replace('%apikey%', apiRiotKey)
+
+
 // const axios = require('axios');
 // const urlApiLol = 'https://euw1.api.riotgames.com';
 // axios.defaults.baseURL = urlApiLol;
@@ -41,7 +44,6 @@ apiUrls.sumoner.replace('%apikey%', apiRiotKey)
 //
 //
 // document.querySelector("#playerName").addEventListener('input', function () {
-//     let url = urlApiLol + `/lol/summoner/v4/summoners/by-name/${this.value}?api_key=` + apiRiotKey;
 //     fetch(url)
 //         .then(response => response.json()
 //             .then(data => {
@@ -75,3 +77,4 @@ function callAjax (url) {
 }
 
 console.log(callAjax(url).id)
+//     let url = urlApiLol + `/lol/summoner/v4/summoners/by-name/${this.value}?api_key=` + apiRiotKey;
