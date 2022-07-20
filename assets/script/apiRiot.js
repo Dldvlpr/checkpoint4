@@ -14,11 +14,11 @@ form.addEventListener('submit', () => {
 
 let url = urlApiLol + `/lol/summoner/v4/summoners/by-name/franckdes2b3?api_key=` + apiRiotKey;
 
-// TODO: faire un objet ou l'on rajoute les urls
+// TODO: faire un objet ou l'on rajoute les urls faire un replace avec un modulo
 const apiUrls = {
-  sumoner: "/lol/summoner/v4/summoners/by-name/franckdes2b3?api_key="
+  sumoner: "/lol/summoner/v4/summoners/by-name/franckdes2b3?api_key=%apikey%"
 }
-
+apiUrls.sumoner.replace('%apikey%', apiRiotKey)
 // const axios = require('axios');
 // const urlApiLol = 'https://euw1.api.riotgames.com';
 // axios.defaults.baseURL = urlApiLol;
