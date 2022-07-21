@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\LolProfileRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LolProfileRepository::class)]
@@ -14,43 +13,37 @@ class LolProfile
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?int $lolId = null;
+    #[ORM\Column(length: 255)]
+    private ?string $summonerName = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    private User $user;
-
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $rankedFlex = [];
-
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $rankedSolo = [];
+    #[ORM\ManyToOne(inversedBy: 'lolProfiles')]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRankedFlex(): array
+    public function getSummonerName(): ?string
     {
-        return $this->rankedFlex;
+        return $this->summonerName;
     }
 
-    public function setRankedFlex(?array $rankedFlex): self
+    public function setSummonerName(string $summonerName): self
     {
-        $this->rankedFlex = $rankedFlex;
+        $this->summonerName = $summonerName;
 
         return $this;
     }
 
-    public function getRankedSolo(): array
+    public function getUser(): ?User
     {
-        return $this->rankedSolo;
+        return $this->user;
     }
 
-    public function setRankedSolo(?array $rankedSolo): self
+    public function setUser(?User $user): self
     {
-        $this->rankedSolo = $rankedSolo;
+        $this->user = $user;
 
         return $this;
     }

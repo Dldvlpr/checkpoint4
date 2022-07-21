@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\LolProfileRepository;
 use App\Service\CallApiService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,12 +36,21 @@ class SearchController extends AbstractController
     }
 
 
-    #[
-        Route('/search/{playerName}', name: 'player', methods: ['GET', 'POST'])]
-    public function player(CallApiService $callApiService, string $playerName): Response
+    #[Route('/search/{playerName}', name: 'player', methods: ['GET', 'POST'])]
+    public function player(CallApiService $callApiService, EntityManagerInterface $entityManager, LolProfileRepository $lolProfileRepository, string $playerName): Response
     {
         $stats = $callApiService->getsummonerStat($playerName);
 
+        // TODO
+        // Vérifier si le sumorname existe en BDD avec l'id de l'utilisateur courant
+        // Si oui => ne rien faire
+        // Si non => le créer
+
+
+        $userLolProfile = $lolProfileRepository->findOneBy(['user' => $this->getUser()]);
+        $userLolProfile->setSummonerName($playerName);
+
+        $entityManager->flush($userLolProfile, true);
 
         return $this->render('search/searchBar.html.twig', [
             'stats' => $stats
