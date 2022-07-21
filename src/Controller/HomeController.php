@@ -13,7 +13,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(CallApiService $callApiService): Response
+    public function index(): Response
     {
         return $this->render('home/index.html.twig', [
 

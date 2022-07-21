@@ -14,9 +14,10 @@ class CallApiService
         $this->client = $client;
     }
 
-    public function getsummonerid(): array
+
+    public function getsummonerStat(string $playerName): array
     {
-        $playerName = 'franckdes2b3';
+
 
         $playerId = $this->client->request(
             'GET',

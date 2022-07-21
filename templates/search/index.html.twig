@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block body %}
+
+    <form action="{{ path('search_player') }}" method="POST">
+        <input type="text" value="playerName" name="playerName" id="playerName"/>
+        <button type="submit">Search</button>
+    </form>
+
+{% endblock %}
