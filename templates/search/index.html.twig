@@ -3,9 +3,7 @@
 {% block title %}Hello SearchController!{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('submit') }}</button>
-    {{ form_end(form) }}
+
+    <div class="d-flex justify-content-center align-items-center">{%include 'search/_form.html.twig' %}</div>
 
 {% endblock %}

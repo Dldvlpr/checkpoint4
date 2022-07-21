@@ -27,25 +27,25 @@ class SearchController extends AbstractController
             $playerName = $form->getData();
             return $this->redirectToRoute('search_player',
                 $playerName
-                );
+            );
         }
         return $this->renderForm('search/index.html.twig', [
             'form' => $form,]);
     }
 
 
-
-#[
-Route('/search/{playerName}', name: 'player', methods: ['GET', 'POST'])]
+    #[
+        Route('/search/{playerName}', name: 'player', methods: ['GET', 'POST'])]
     public function player(CallApiService $callApiService, string $playerName): Response
-{
-    $stat = $callApiService->getsummonerStat($playerName);
+    {
+        $stats = $callApiService->getsummonerStat($playerName);
 
 
-    return $this->render('search/searchBar.html.twig', [
-        'stat' => $stat
-    ]);
-}
+        return $this->render('search/searchBar.html.twig', [
+            'stats' => $stats
+        ]);
+    }
+
 }
 
 

@@ -1,4 +1,31 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<p>{{ stat.0.tier }}</p>
+    <div class="row">
+    <h1 class="text-center">{{ stats.0.summonerName }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Rang: {{ stats.0.queueType }}</h5>
+                    <p class="card-text">Tier: {{ stats.0.tier }}</p>
+                    <p class="card-text">LP: {{ stats.0.leaguePoints }}</p>
+                    <p class="card-text">Wins: {{ stats.0.wins }}</p>
+                    <p class="card-text">Loose: {{ stats.0.losses }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Rang: {{ stats.1.queueType }}</h5>
+                    <p class="card-text">Tier: {{ stats.1.tier }}</p>
+                    <p class="card-text">LP: {{ stats.1.leaguePoints }}</p>
+                    <p class="card-text">Wins: {{ stats.1.wins }}</p>
+                    <p class="card-text">Loose: {{ stats.1.losses }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary shadow" value="">associer à son profil</button>
 {% endblock %}
