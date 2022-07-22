@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setEmail($faker->email());
             $hashedPassword = $this->passwordHasher->hashPassword(
@@ -30,10 +30,25 @@ class UserFixtures extends Fixture
             );
             $user->setPassword($hashedPassword);
             $user->setNickname($faker->userName());
+            $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
         }
 
+        $user = new User();
+        $user->setEmail($faker->email());
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $user,
+            'password'
+        );
+        $user->setPassword($hashedPassword);
+        $user->setNickname($faker->userName());
+        $user->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($user);
+
         $manager->flush();
     }
+
+
 }

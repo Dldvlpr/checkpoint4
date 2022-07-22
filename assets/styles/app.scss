@@ -1,15 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
 
-.titleIndex {
-  color: goldenrod;
-  font-size: 15em;
-}
-
-.subIndex {
-  color: goldenrod;
-  font-size: 3em;
-}
-
 body {
   background-color: #303d69;
+}
+
+.sizingdiv {
+  width: 18em;
+}
+
+.card-register {
+  border-radius: 5em;
 }

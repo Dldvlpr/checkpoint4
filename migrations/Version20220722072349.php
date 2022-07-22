@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220720082941 extends AbstractMigration
+final class Version20220722072349 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,16 @@ final class Version20220720082941 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE lol_profile DROP league_id, DROP summoner_id, DROP summoner_name, DROP summoner_rank, DROP summoner_tier, CHANGE league_points user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE lol_profile ADD user_id INT DEFAULT NULL, ADD lol_id LONGTEXT DEFAULT NULL');
         $this->addSql('ALTER TABLE lol_profile ADD CONSTRAINT FK_3BCF0C45A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_3BCF0C45A76ED395 ON lol_profile (user_id)');
+        $this->addSql('CREATE INDEX IDX_3BCF0C45A76ED395 ON lol_profile (user_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE lol_profile DROP FOREIGN KEY FK_3BCF0C45A76ED395');
-        $this->addSql('DROP INDEX UNIQ_3BCF0C45A76ED395 ON lol_profile');
-        $this->addSql('ALTER TABLE lol_profile ADD league_id VARCHAR(255) NOT NULL, ADD summoner_id VARCHAR(255) NOT NULL, ADD summoner_name VARCHAR(255) NOT NULL, ADD summoner_rank VARCHAR(255) DEFAULT NULL, ADD summoner_tier VARCHAR(255) DEFAULT NULL, CHANGE user_id league_points INT DEFAULT NULL');
+        $this->addSql('DROP INDEX IDX_3BCF0C45A76ED395 ON lol_profile');
+        $this->addSql('ALTER TABLE lol_profile DROP user_id, DROP lol_id');
     }
 }
