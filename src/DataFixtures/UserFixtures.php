@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\LolProfile;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -31,16 +30,25 @@ class UserFixtures extends Fixture
             );
             $user->setPassword($hashedPassword);
             $user->setNickname($faker->userName());
-
-            $lolProfile = new LolProfile();
-            $lolProfile->setUser($user);
-            $lolProfile->setSummonerName("non renseigné");
-            $user->addLolProfile($lolProfile);
+            $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
-            $manager->persist($lolProfile);
         }
+
+        $user = new User();
+        $user->setEmail($faker->email());
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $user,
+            'password'
+        );
+        $user->setPassword($hashedPassword);
+        $user->setNickname($faker->userName());
+        $user->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($user);
 
         $manager->flush();
     }
+
+
 }

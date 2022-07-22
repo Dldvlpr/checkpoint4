@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/search', name: 'search_')]
+#[Route('/', name: 'search_')]
 class SearchController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
@@ -47,10 +47,10 @@ class SearchController extends AbstractController
         // Si non => le créer
 
 
-        $userLolProfile = $lolProfileRepository->findOneBy(['user' => $this->getUser()]);
-        $userLolProfile->setSummonerName($playerName);
+        //$userLolProfile = $lolProfileRepository->findOneBy(['user' => $this->getUser()]);
+        //$userLolProfile->setSummonerName($playerName);
 
-        $entityManager->flush($userLolProfile, true);
+        //$entityManager->flush($userLolProfile, true);
 
         return $this->render('search/searchBar.html.twig', [
             'stats' => $stats

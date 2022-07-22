@@ -40,13 +40,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: LolProfile::class)]
-    private Collection $lolProfiles;
-
     public function __construct()
     {
         $this->games = new ArrayCollection();
-        $this->lolProfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,36 +159,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, LolProfile>
-     */
-    public function getLolProfiles(): Collection
-    {
-        return $this->lolProfiles;
-    }
-
-    public function addLolProfile(LolProfile $lolProfile): self
-    {
-        if (!$this->lolProfiles->contains($lolProfile)) {
-            $this->lolProfiles[] = $lolProfile;
-            $lolProfile->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLolProfile(LolProfile $lolProfile): self
-    {
-        if ($this->lolProfiles->removeElement($lolProfile)) {
-            // set the owning side to null (unless already changed)
-            if ($lolProfile->getUser() === $this) {
-                $lolProfile->setUser(null);
-            }
-        }
 
         return $this;
     }
