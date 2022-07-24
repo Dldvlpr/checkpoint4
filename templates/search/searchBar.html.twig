@@ -5,7 +5,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-details">
                 <div class="card-body">
                     <h5 class="card-title">Rang: {{ stats.0.queueType }}</h5>
                     <p class="card-text">Tier: {{ stats.0.tier }}</p>
@@ -13,16 +13,34 @@
                     <p class="card-text">Wins: {{ stats.0.wins }}</p>
                     <p class="card-text">Loose: {{ stats.0.losses }}</p>
                 </div>
+                <div class="menu">
+                    <div class="header">
+                        <div class="tittle">More</div>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="content">
+                        more information
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card card-details">
                 <div class="card-body">
                     <h5 class="card-title">Rang: {{ stats.1.queueType }}</h5>
                     <p class="card-text">Tier: {{ stats.1.tier }}</p>
                     <p class="card-text">LP: {{ stats.1.leaguePoints }}</p>
                     <p class="card-text">Wins: {{ stats.1.wins }}</p>
                     <p class="card-text">Loose: {{ stats.1.losses }}</p>
+                </div>
+                <div class="menu">
+                    <div class="header">
+                        <div class="tittle">More</div>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="content">
+                        more information
+                    </div>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ class CallApiService
 
         $playerId = $this->client->request(
             'GET',
-            "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/$playerName?api_key=RGAPI-4788b30f-d2f7-43bc-b9b7-a9d09e1876af"
+            "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/$playerName?api_key=RGAPI-88ac03b1-0cf4-443c-8c16-8d123c178b8e"
         );
 
         $ar = $playerId->toArray();
@@ -32,7 +32,7 @@ class CallApiService
 
         $playerStat = $this->client->request(
             'GET',
-            "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/$id?api_key=RGAPI-4788b30f-d2f7-43bc-b9b7-a9d09e1876af"
+            "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/$id?api_key=RGAPI-88ac03b1-0cf4-443c-8c16-8d123c178b8e"
         );
 
         return $playerStat = $playerStat->toArray();

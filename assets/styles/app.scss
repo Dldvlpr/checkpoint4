@@ -11,3 +11,43 @@ body {
 .card-register {
   border-radius: 5em;
 }
+
+#accordion {
+  max-width: 500px;
+  margin:0 auto;
+}
+
+.menu {
+  border:1px solid #008080;
+  border-bottom:none;
+}
+
+.menu:last-child {
+  border-bottom:1px solid #808080;
+}
+
+.header {
+  display:flex;
+  padding:10px;
+  cursor: pointer;
+}
+
+.title {
+  flex:1;
+}
+
+.icon {
+  width:20px;
+}
+
+.content {
+  max-height: 0;
+  transition: max-height 1s ease-out;
+  overflow: hidden;
+  padding:0;
+}
+
+.content-transition {
+  max-height: 1500px;
+  transition: max-height 3s ease-in;
+}
