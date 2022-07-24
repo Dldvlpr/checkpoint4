@@ -1,6 +1,6 @@
-const headers = document.getElementsByClassName("header");
-const contents = document.getElementsByClassName("content");
-const icons = document.getElementsByClassName("content");
+const headers = document.getElementsByClassName("header"),
+    contents = document.getElementsByClassName("content"),
+    icons = document.getElementsByClassName("icon");
 
 
 for (let i = 0; i < headers.length; i++) {
